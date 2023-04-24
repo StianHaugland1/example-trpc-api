@@ -1,0 +1,67 @@
+# Node.js
+node_modules/
+npm-debug.log
+*.log
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# Built output
+build/
+dist/
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+*.sublime*
+*.swp
+
+# Testing artifacts
+coverage/
+.nyc_output/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.backup
+*.orig
+*.log.*
+*.log-*
+*.log/*
+*.pid
+*.pid.*
+*.sock
+*.sock.*
+*.sock/*
+*.pid.lock
+*.log.lock
+*.test.js
+*.test.ts
+*.config.js
+*.config.ts
+*.config.json
+*.config.yml
+*.config.yaml
+*.config.env
+*.config.env.local
+*.config.env.*.local
+*.config.local
+*.config.*.local
+*.logs/
+*.log/
+*.log/*
+*.log-*
+*.log.*
+*.log.*.*
