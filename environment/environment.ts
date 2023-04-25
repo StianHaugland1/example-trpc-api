@@ -1,6 +1,6 @@
 const jwtSecret = process.env.JWT_SECRET;
 
-export const PORT = process.env.PORT || 4000;
+export const PORT = process.env.PORT || 5001;
 
 export const getJwtSecret = () => {
   if(jwtSecret === undefined) {
