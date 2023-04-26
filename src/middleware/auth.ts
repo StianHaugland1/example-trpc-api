@@ -5,7 +5,7 @@ import { t } from "../trpc";
 import { AUTH0_ISSUER_BASE_URL } from "../environment/environment";
 
 const client = jwksClient({
-  jwksUri: `${AUTH0_ISSUER_BASE_URL}https://example-api.eu.auth0.com/.well-known/jwks.json`,
+  jwksUri: `${AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`,
 });
 
 const isAuthed = t.middleware(async ({ next, ctx }) => {
