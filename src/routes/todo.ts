@@ -5,7 +5,7 @@ import {
   deleteTodo,
   getTodoById,
   getTodos,
-} from "../db";
+} from "../../db/todo";
 import { t, router } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
