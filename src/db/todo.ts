@@ -20,6 +20,7 @@ export const getTodos = () => todos;
 export const getTodoById = (id: number) => todos.find(todo => todo.id === id);
 
 export const addTodo = (title: string, completed = false) => {
+  // eslint-disable-next-line no-plusplus
   const newTodo = { id: nextTodoId++, title, completed };
   todos.push(newTodo);
   return newTodo;

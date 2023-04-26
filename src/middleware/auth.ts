@@ -1,7 +1,7 @@
-import { t } from "../trpc";
 import jwksClient from "jwks-rsa";
 import { verify } from "jsonwebtoken";
 import { TRPCError } from "@trpc/server";
+import { t } from "../trpc";
 import { AUTH0_ISSUER_BASE_URL } from "../environment/environment";
 
 const client = jwksClient({
@@ -29,7 +29,7 @@ const isAuthed = t.middleware(async ({ next, ctx }) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw new TRPCError({ code: "UNAUTHORIZED", message: `Invalid token` });
   }
 });
@@ -41,13 +41,12 @@ const validateScopes = (requiredScopes: string[]) => {
     );
     if (!hasValidScopes)
       throw new TRPCError({ code: "UNAUTHORIZED", message: `Invalid scope` });
-    ctx.scopes;
     return next();
   });
 };
 
 export const validTokenAndScopeProcedure = (requiredScopes: string[]) => {
-  //@ts-expect-error temp type error in the trpc library
+  // @ts-expect-error temp type error in the trpc library
   const middleware = isAuthed.unstable_pipe(validateScopes(requiredScopes));
   return t.procedure.use(middleware);
 };

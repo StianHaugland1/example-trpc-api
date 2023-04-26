@@ -1,3 +1,5 @@
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { Todo } from "../types/Todo";
 import {
   addTodo,
@@ -7,8 +9,6 @@ import {
   getTodos,
 } from "../db/todo";
 import { t, router } from "../trpc";
-import { z } from "zod";
-import { TRPCError } from "@trpc/server";
 import { validTokenAndScopeProcedure } from "../middleware/auth";
 
 const publicProcedure = t.procedure;

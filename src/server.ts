@@ -33,10 +33,8 @@ app.get("/openapi", (_req, res) => {
 app.use("/", serve, setup(openApiDocument));
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.info(`Server running on port ${PORT}`);
 });
-
-
 
 // const test = appRouter
 //   .createCaller({
