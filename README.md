@@ -20,7 +20,7 @@ Before you can run this app, please make sure you have the following installed o
 The app uses environment variables for configuration. You need to set up the following environment variables:
 
 - `PORT`: The port number on which the server will listen. (Default is 3000)
-- `AUTH0_ISSUER_BASE_URL`: The base URL of the Auth0 issuer for verifying JWT tokens. This is required for authentication. 
+- `AUTH0_ISSUER_BASE_URL`: The base URL of the Auth0 issuer for verifying JWT tokens. This is required for authentication.
 
 You can set the environment variables in a `.env` file in the root of your project or using another method of your choice.
 
@@ -28,5 +28,4 @@ You can set the environment variables in a `.env` file in the root of your proje
 
 You can start the app by running the following command in the terminal:
 
-```npm run dev```
-
+`npm run dev`
