@@ -24,7 +24,7 @@ export const todoRouter = router({
       return getTodos();
     }),
 
-  getTodo: t.procedure
+  getTodo: publicProcedure
     .meta({ openapi: { method: "GET", path: "/todos/{id}" } })
     .input(z.object({ id: z.number() }))
     .output(Todo)
@@ -40,7 +40,7 @@ export const todoRouter = router({
       return todo;
     }),
 
-  addTodo: t.procedure
+  addTodo: publicProcedure
     .meta({ openapi: { method: "POST", path: "/todos" } })
     .input(z.object({ title: z.string() }))
     .output(z.string())
