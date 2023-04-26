@@ -7,9 +7,3 @@ export const Todo = z.object({
 })
 
 export type Todo = z.infer<typeof Todo>
-
-// export type Todo = {
-//   "id": number,
-//   "title": string,
-//   "completed": boolean
-// }

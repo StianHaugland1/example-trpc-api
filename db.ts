@@ -1,14 +1,4 @@
-import { getJwtSecret } from "./environment/environment";
 import { Todo } from "./types/Todo";
-import { User } from "./types/User";
-import jwt from "jsonwebtoken";
-
-export const jwtSecret = getJwtSecret();
-
-const users: User[] = [
-  { username: "admin", password: "admin" },
-  { username: "user", password: "user" },
-];
 
 const todos: Todo[] = [
   { id: 0, title: "Vask bilen", completed: false },
@@ -18,26 +8,6 @@ const todos: Todo[] = [
 ];
 
 let nextTodoId = 4;
-
-export const getToken = (username: string, password: string) => {
-  const user = users.find(
-    (user) => user.username === username && user.password === password
-  );
-  if (!user) return;
-  const token = jwt.sign({ name: user.username }, jwtSecret, {
-    expiresIn: "1m",
-  });
-  return token;
-};
-
-export const verifyToken = (token: string) => {
-  try {
-    const decodedToken = jwt.verify(token, jwtSecret);
-    return decodedToken;
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 const findTodoIndex = (id: number) => {
   const index = todos.findIndex((todo) => todo.id === id);

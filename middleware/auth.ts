@@ -1,7 +1,7 @@
 import { t } from "../trpc";
 import jwksClient from "jwks-rsa";
-import jwt from "jsonwebtoken";
-import { MiddlewareFunction, TRPCError } from "@trpc/server";
+import {verify} from "jsonwebtoken";
+import { TRPCError } from "@trpc/server";
 
 const client = jwksClient({
   // TODO ENV VAR
@@ -18,7 +18,7 @@ const isAuthed = t.middleware(async ({ next, ctx }) => {
   try {
     const key = await client.getSigningKey(ctx.kid);
     const signingKey = key.getPublicKey();
-    const decodedToken = jwt.verify(ctx.token, signingKey);
+    const decodedToken = verify(ctx.token, signingKey);
      if(typeof decodedToken === "string") return next()
      const scopes = decodedToken?.scope?.split(" ")
 
@@ -42,10 +42,10 @@ const validateScopes = (requiredScopes: string[]) => {
     return next()
   })
 }
-export const procedureWithValidTokenAndScopes = (requiredScopes: string[]) => {
-  //@ts-expect-error
+export const validTokenAndScopeProcedure = (requiredScopes: string[]) => {
+  //@ts-expect-error temp type error in the trpc library
   const middleware = isAuthed.unstable_pipe(validateScopes(requiredScopes))
   return t.procedure.use(middleware)
 }
 
-export const protectedProcedure = t.procedure.use(isAuthed)
+// export const validTokenProcedure = t.procedure.use(isAuthed)
