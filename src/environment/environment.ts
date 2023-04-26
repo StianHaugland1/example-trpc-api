@@ -4,7 +4,7 @@ dotenv.config();
 
 export const PORT = process.env.PORT || 5001;
 
-export const AUTH0_ISSUER_BASE_URL = process.env.AUTH0_ISSUER_BASE_URL;
+export const { AUTH0_ISSUER_BASE_URL } = process.env;
 
 if (!AUTH0_ISSUER_BASE_URL) {
   console.error("AUTH0_ISSUER_BASE_URL is missing");
