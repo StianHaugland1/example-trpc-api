@@ -2,10 +2,10 @@ import { t } from "../trpc";
 import jwksClient from "jwks-rsa";
 import { verify } from "jsonwebtoken";
 import { TRPCError } from "@trpc/server";
+import { AUTH0_ISSUER_BASE_URL } from "../environment/environment";
 
 const client = jwksClient({
-  // TODO ENV VAR
-  jwksUri: "https://example-api.eu.auth0.com/.well-known/jwks.json",
+  jwksUri: `${AUTH0_ISSUER_BASE_URL}https://example-api.eu.auth0.com/.well-known/jwks.json`,
 });
 
 const isAuthed = t.middleware(async ({ next, ctx }) => {
@@ -45,6 +45,7 @@ const validateScopes = (requiredScopes: string[]) => {
     return next();
   });
 };
+
 export const validTokenAndScopeProcedure = (requiredScopes: string[]) => {
   //@ts-expect-error temp type error in the trpc library
   const middleware = isAuthed.unstable_pipe(validateScopes(requiredScopes));

@@ -34,6 +34,11 @@ app.use(
 //checkJWT middleware
 // app.use('/api', checkJwt, createOpenApiExpressMiddleware({ router: appRouter, createContext }));
 
+// Openapi spec
+app.get("/openapi", (_req, res) => {
+  res.json(openApiDocument);
+});
+
 // Serve Swagger UI with our OpenAPI schema
 app.use("/", serve, setup(openApiDocument));
 
