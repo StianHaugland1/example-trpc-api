@@ -10,14 +10,14 @@ const todos: Todo[] = [
 let nextTodoId = 4;
 
 const findTodoIndex = (id: number) => {
-  const index = todos.findIndex((todo) => todo.id === id);
+  const index = todos.findIndex(todo => todo.id === id);
   if (index === -1) return;
   return index;
 };
 
 export const getTodos = () => todos;
 
-export const getTodoById = (id: number) => todos.find((todo) => todo.id === id);
+export const getTodoById = (id: number) => todos.find(todo => todo.id === id);
 
 export const addTodo = (title: string, completed = false) => {
   const newTodo = { id: nextTodoId++, title, completed };

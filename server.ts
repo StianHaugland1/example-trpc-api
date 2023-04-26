@@ -1,6 +1,6 @@
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import express from "express";
-import {serve, setup} from "swagger-ui-express";
+import { serve, setup } from "swagger-ui-express";
 import { createOpenApiExpressMiddleware } from "trpc-openapi";
 
 import { openApiDocument } from "./openapi";
@@ -22,13 +22,13 @@ const app = express();
 // Handle incoming tRPC requests
 app.use(
   "/api/trpc",
-  createExpressMiddleware({ router: appRouter, createContext })
+  createExpressMiddleware({ router: appRouter, createContext }),
 );
 
 // Handle incoming OpenAPI requests
 app.use(
   "/api",
-  createOpenApiExpressMiddleware({ router: appRouter, createContext })
+  createOpenApiExpressMiddleware({ router: appRouter, createContext }),
 );
 
 //checkJWT middleware

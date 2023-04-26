@@ -28,7 +28,7 @@ export const todoRouter = router({
     .meta({ openapi: { method: "GET", path: "/todos/{id}" } })
     .input(z.object({ id: z.number() }))
     .output(Todo)
-    .query((req) => {
+    .query(req => {
       // const todoId = parseInt(req.input.id);
       const todo = getTodoById(req.input.id);
       if (!todo) {
@@ -44,7 +44,7 @@ export const todoRouter = router({
     .meta({ openapi: { method: "POST", path: "/todos" } })
     .input(z.object({ title: z.string() }))
     .output(z.string())
-    .mutation((req) => {
+    .mutation(req => {
       addTodo(req.input.title);
       return "Todo added";
     }),
@@ -53,7 +53,7 @@ export const todoRouter = router({
     .meta({ openapi: { method: "PUT", path: "/todos/{id}", protect: true } })
     .input(z.object({ id: z.number() }))
     .output(z.object({ message: z.string(), todo: Todo }))
-    .mutation((req) => {
+    .mutation(req => {
       const completedTodo = completeTodo(req.input.id);
       if (!completedTodo)
         throw new TRPCError({
@@ -70,7 +70,7 @@ export const todoRouter = router({
     .meta({ openapi: { method: "DELETE", path: "/todos/{id}", protect: true } })
     .input(z.object({ id: z.number() }))
     .output(z.object({ message: z.string(), todo: Todo }))
-    .mutation((req) => {
+    .mutation(req => {
       const deletedTodo = deleteTodo(req.input.id);
       if (!deletedTodo)
         throw new TRPCError({
