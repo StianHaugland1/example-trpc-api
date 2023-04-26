@@ -6,16 +6,9 @@ import { createOpenApiExpressMiddleware } from "trpc-openapi";
 import { openApiDocument } from "./openapi";
 import { appRouter } from "./routes/appRouter";
 import { PORT } from "./environment/environment";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { auth } from "express-oauth2-jwt-bearer";
 import { createContext } from "./trpc";
 
 const app = express();
-
-// const checkJwt = auth({
-//   audience: "https://example-api.devdev.no/",
-//   issuerBaseURL: `https://example-api.eu.auth0.com/`,
-// });
 
 // Setup CORS
 
@@ -31,9 +24,6 @@ app.use(
   createOpenApiExpressMiddleware({ router: appRouter, createContext }),
 );
 
-//checkJWT middleware
-// app.use('/api', checkJwt, createOpenApiExpressMiddleware({ router: appRouter, createContext }));
-
 // Openapi spec
 app.get("/openapi", (_req, res) => {
   res.json(openApiDocument);
@@ -45,6 +35,8 @@ app.use("/", serve, setup(openApiDocument));
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
 
 // const test = appRouter
 //   .createCaller({
