@@ -8,7 +8,6 @@ const todos: Todo[] = [
   { id: randomUUID(), title: "Les en bok", completed: false },
 ];
 
-
 const findTodoIndex = (id: string) => {
   const index = todos.findIndex(todo => todo.id === id);
   if (index === -1) return;
