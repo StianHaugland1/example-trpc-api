@@ -12,6 +12,7 @@ import { t, router } from "../trpc";
 import { validTokenAndScopeProcedure } from "../middleware/auth";
 
 const publicProcedure = t.procedure;
+const readProcedure = validTokenAndScopeProcedure(["read:todos"]);
 const editProcedure = validTokenAndScopeProcedure(["edit:todos"]);
 const deleteProcedure = validTokenAndScopeProcedure(["delete:todos"]);
 
@@ -24,12 +25,11 @@ export const todoRouter = router({
       return getTodos();
     }),
 
-  getTodo: publicProcedure
-    .meta({ openapi: { method: "GET", path: "/todos/{id}" } })
+  getTodo: readProcedure
+    .meta({ openapi: { method: "GET", path: "/todos/{id}", protect: true } })
     .input(z.object({ id: z.number() }))
     .output(Todo)
     .query(req => {
-      // const todoId = parseInt(req.input.id);
       const todo = getTodoById(req.input.id);
       if (!todo) {
         throw new TRPCError({
