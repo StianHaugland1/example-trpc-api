@@ -27,7 +27,7 @@ export const todoRouter = router({
 
   getTodo: readProcedure
     .meta({ openapi: { method: "GET", path: "/todos/{id}", protect: true } })
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.string().uuid() }))
     .output(Todo)
     .query(req => {
       const todo = getTodoById(req.input.id);
@@ -51,7 +51,7 @@ export const todoRouter = router({
 
   completeTodo: editProcedure
     .meta({ openapi: { method: "PUT", path: "/todos/{id}", protect: true } })
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.string().uuid() }))
     .output(z.object({ message: z.string(), todo: Todo }))
     .mutation(req => {
       const completedTodo = completeTodo(req.input.id);
@@ -68,7 +68,7 @@ export const todoRouter = router({
 
   deleteTodo: deleteProcedure
     .meta({ openapi: { method: "DELETE", path: "/todos/{id}", protect: true } })
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.string().uuid() }))
     .output(z.object({ message: z.string(), todo: Todo }))
     .mutation(req => {
       const deletedTodo = deleteTodo(req.input.id);

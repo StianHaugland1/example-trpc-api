@@ -1,15 +1,15 @@
+import { randomUUID } from "crypto";
 import { Todo } from "../types/Todo";
 
 const todos: Todo[] = [
-  { id: 0, title: "Vask bilen", completed: false },
-  { id: 1, title: "Rydd huset", completed: false },
-  { id: 2, title: "Gå en tur", completed: false },
-  { id: 3, title: "Les en bok", completed: false },
+  { id: randomUUID(), title: "Vask bilen", completed: false },
+  { id: randomUUID(), title: "Rydd huset", completed: false },
+  { id: randomUUID(), title: "Gå en tur", completed: false },
+  { id: randomUUID(), title: "Les en bok", completed: false },
 ];
 
-let nextTodoId = 4;
 
-const findTodoIndex = (id: number) => {
+const findTodoIndex = (id: string) => {
   const index = todos.findIndex(todo => todo.id === id);
   if (index === -1) return;
   return index;
@@ -17,16 +17,15 @@ const findTodoIndex = (id: number) => {
 
 export const getTodos = () => todos;
 
-export const getTodoById = (id: number) => todos.find(todo => todo.id === id);
+export const getTodoById = (id: string) => todos.find(todo => todo.id === id);
 
 export const addTodo = (title: string, completed = false) => {
-  // eslint-disable-next-line no-plusplus
-  const newTodo = { id: nextTodoId++, title, completed };
+  const newTodo = { id: randomUUID(), title, completed };
   todos.push(newTodo);
   return newTodo;
 };
 
-export const completeTodo = (id: number) => {
+export const completeTodo = (id: string) => {
   const index = findTodoIndex(id);
   if (index === undefined) return;
   const todo = todos[index];
@@ -35,7 +34,7 @@ export const completeTodo = (id: number) => {
   return completedTodo;
 };
 
-export const deleteTodo = (id: number) => {
+export const deleteTodo = (id: string) => {
   const index = findTodoIndex(id);
   if (index === undefined) return;
   const deletedTodo = todos[index];
