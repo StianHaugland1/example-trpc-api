@@ -30,5 +30,5 @@
     "import/no-unused-modules": [1, { "unusedExports": true }],
     "import/no-extraneous-dependencies": "warn"
   },
-  "ignorePatterns": ["cmd"]
+  "ignorePatterns": ["cmd", "dist"]
 }
