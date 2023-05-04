@@ -12,9 +12,13 @@ import { t, router } from "../trpc";
 import { validTokenAndScopeProcedure } from "../middleware/auth";
 
 const publicProcedure = t.procedure;
+const protectedProcedure = validTokenAndScopeProcedure([]);
 const readProcedure = validTokenAndScopeProcedure(["read:todos"]);
 const editProcedure = validTokenAndScopeProcedure(["edit:todos"]);
-const deleteProcedure = validTokenAndScopeProcedure(["delete:todos"]);
+const editDeleteProcedure = validTokenAndScopeProcedure([
+  "edit:todos",
+  "delete:todos",
+]);
 
 export const todoRouter = router({
   getTodos: publicProcedure
@@ -40,8 +44,8 @@ export const todoRouter = router({
       return todo;
     }),
 
-  addTodo: publicProcedure
-    .meta({ openapi: { method: "POST", path: "/todos" } })
+  addTodo: protectedProcedure
+    .meta({ openapi: { method: "POST", path: "/todos", protect: true } })
     .input(z.object({ title: z.string() }))
     .output(z.string())
     .mutation(req => {
@@ -66,7 +70,7 @@ export const todoRouter = router({
       };
     }),
 
-  deleteTodo: deleteProcedure
+  deleteTodo: editDeleteProcedure
     .meta({ openapi: { method: "DELETE", path: "/todos/{id}", protect: true } })
     .input(z.object({ id: z.string().uuid() }))
     .output(z.object({ message: z.string(), todo: Todo }))
