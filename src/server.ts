@@ -5,7 +5,7 @@ import { createOpenApiExpressMiddleware } from "trpc-openapi";
 
 import { openApiDocument } from "./openapi";
 import { appRouter } from "./routes/appRouter";
-import { PORT } from "./environment/environment";
+import { BASE_URL, PORT } from "./environment/environment";
 import { createContext } from "./trpc";
 
 const app = express();
@@ -34,6 +34,7 @@ app.use("/", serve, setup(openApiDocument));
 
 app.listen(PORT, () => {
   console.info(`Server running on port ${PORT}`);
+  console.info(`BASE url: ${BASE_URL}`);
 });
 
 // const test = appRouter
